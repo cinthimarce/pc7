@@ -5,6 +5,7 @@ import NotFound from '@/views/NotFound.vue'
 import Departamentos from '@/views/Departamentos.vue'
 import Empleados from '@/views/Empleados.vue'
 import Turnos from '@/views/Turnos.vue'
+import EmpleadosDepartamento from '@/views/EmpleadosDepartamento.vue'
 
 Vue.use(VueRouter)
 
@@ -17,17 +18,23 @@ const routes = [
   {
     path: '/departamentos',
     name: 'departamentos',
-    component: Departamentos
+    component: Departamentos,
   },
+
   {
     path: '/empleados',
     name: 'empleados',
-    component: Empleados
+    component: Empleados,
+  },
+  {
+    path: '/empleadosdepartamento/:id',
+    name: 'empleadosdepartamento',
+    component: EmpleadosDepartamento,
   },
   {
     path: '/turnos',
     name: 'turnos',
-    component: Turnos
+    component: Turnos,
   },
   {
     path: '/about',

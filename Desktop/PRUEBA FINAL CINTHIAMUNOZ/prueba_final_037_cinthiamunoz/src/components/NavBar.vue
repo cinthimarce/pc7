@@ -22,6 +22,7 @@
             </v-layout>
         </v-app-bar>
     </div>
+    
 </template>
 
 <script>
@@ -46,7 +47,7 @@ export default {
                 {
                     icon:'mdi-account-group',
                     title:'Empleados',
-                    name:'empleados'
+                    name:'empleadosdepartamento'
                 },
                 {
                     icon:'mdi-timer',

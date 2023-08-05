@@ -1,36 +1,31 @@
 <template>
   <v-container fluid>
-    <!-- BREADCRUMBS -->
-    <v-breadcrumbs :items="items">
-      <template v-slot:item="{ item }">
-        <v-breadcrumbs-item :href="item.href" :disabled="item.disabled">
-          {{ item.text.toUpperCase() }}
-        </v-breadcrumbs-item>
-      </template>
-    </v-breadcrumbs>
-
-    <!-- IMAGENES -->
-
+    <breadcr></breadcr>
     <v-row justify="space-around" align="center" class="img-dptos">
       <!-- DPTOS -->
-      <v-col class="d-flex justify-content-center">
+      <v-col class="d-flex justify-content-center" >
         <v-card>
-          <v-img max-height="355" max-width="570" src="@/assets/img/departamentos.jpg">
-          </v-img>
+          <a href="departamentos">
+            <v-img max-height="355" max-width="570" src="@/assets/img/departamentos.jpg" alt="img"></v-img>
+          </a>
         </v-card>
       </v-col>
-      <!-- EMPLEADOS -->
-      <v-col class="d-flex justify-content-center">
+      <!-- EMPLOYER -->
+      <v-col class="d-flex justify-content-center" >
         <v-card>
-          <v-img max-height="355" max-width="570" src="@/assets/img/empleados.jpg">
-          </v-img>
+          <a href="empleados">
+            <v-img max-height="355" max-width="570" src="@/assets/img/empleados.jpg" alt="img">
+            </v-img>
+          </a>
         </v-card>
       </v-col>
       <!-- TURNOS -->
-      <v-col class="d-flex justify-content-center">
+      <v-col class="d-flex justify-content-center" >
         <v-card>
-          <v-img max-height="355" max-width="570" src="@/assets/img/turnos.jpg">
-          </v-img>
+          <a href="turnos">
+            <v-img max-height="355" max-width="570" src="@/assets/img/turnos.jpg" alt="img">
+            </v-img>
+          </a>
         </v-card>
       </v-col>
     </v-row>
@@ -38,27 +33,19 @@
 </template>
 
 <script>
-
+import Breadcrumbs from '@/components/Breadcrumbs.vue';
 export default {
-  name: 'Home-view',
+  name: 'home-view',
   // props: {},
-  data: function () {
-    return {
-      items: [
-        {
-          text: 'Inicio',
-          disabled: false,
-          href: 'breadcrumbs_dashboard',
-        },
-
-      ],
-    }
-
+  data: function(){
+    return {}
   },
   // computed: {},
   //methods: {}
   // watch: {},
-  //components: {
+  components: {
+    'breadcr': Breadcrumbs
+  },
   // mixins: [],
   // filters: {},
   // -- Lifecycle Methods
@@ -67,8 +54,7 @@ export default {
 </script>
 
 <style scoped>
-.img-dptos {
-  height: 60vh;
-}
+  .img-dptos{
+    height: 60vh;
+  }
 </style>
-

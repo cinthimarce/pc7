@@ -1,6 +1,5 @@
 <template>
   <v-app>
-  
     <nav-bar/>
     <v-main>
       <router-view/>
@@ -10,6 +9,7 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue';
+import {mapActions} from 'vuex'
 export default {
   name: 'App',
 
@@ -18,6 +18,14 @@ export default {
   }),
   components:{
     'nav-bar': NavBar
+  },
+  methods:{
+    ...mapActions(['fetchDepartments'])
+
+    
+  },
+  created(){
+    this.fetchDepartments()
   }
 };
 </script>
