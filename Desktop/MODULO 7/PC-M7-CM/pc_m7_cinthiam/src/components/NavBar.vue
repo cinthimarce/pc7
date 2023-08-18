@@ -7,11 +7,11 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon>
+            <v-btn icon @click="redirectToHome">
                 <v-icon>mdi-home</v-icon>
             </v-btn>
 
-            <v-btn icon>
+            <v-btn icon @click="redirectTo">
                 <v-icon>mdi-wrench</v-icon>
             </v-btn>
 
@@ -29,7 +29,21 @@ export default {
         return {}
     },
     // computed: {},
-    //methods: {}
+    methods: {
+        redirectTo() {
+            if (this.$route.path == '/administracion') {
+                return
+            }
+            this.$router.push('/administracion')
+        },
+        redirectToHome() {
+            if (this.$route.path == '/') {
+                return
+            }
+            this.$router.push('/')
+        }
+
+    }
     // watch: {},
     // components: {},
     // mixins: [],
