@@ -89,7 +89,7 @@ export default new Vuex.Store({
       console.log(nuevoCurso);
       if(exist==false){
         
-        state.cart.push(nuevoCurso)
+        state.cursos.push(nuevoCurso)
       }
       else{
         

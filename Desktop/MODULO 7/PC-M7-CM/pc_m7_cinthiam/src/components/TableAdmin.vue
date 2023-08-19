@@ -1,19 +1,5 @@
 <template>
     <v-container class="text-center">
-        <!-- <p>Administración</p> -->
-<!--         <template>
-            <v-toolbar flat>
-                <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on, attrs }">
-                        <v-row justify="center" class="mt-4">
-                            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                            Agregar curso
-                            </v-btn>
-                        </v-row>
-                    </template>
-                </v-dialog>     
-            </v-toolbar>        
-        </template> -->
         <v-data-table :headers="headers" :items="cursos" sort-by="calories" class="elevation-1 font-weight-light">
             <template v-slot:[`item.costo`]="{item}">
                 <v-chip :color="getColor(item.costo)" dark>
@@ -25,11 +11,15 @@
                     {{item.fecha_registro}}
                 </v-chip>
             </template>
-            <template v-slot:[`item.completado`]="{ item }">
-                <v-chip :color="getColor(item.completado)" dark>
-                    {{item.completado}}
-                </v-chip>
-            </template>
+                <template v-slot:[`item.completado`]="{ item }">
+                    <v-chip v-if="item.completado == true" color="light-blue" dark  >
+                        SI
+                    </v-chip>
+                    <v-chip v-else color="blue-grey lighten-2" dark>
+                        NO
+                    </v-chip>
+                </template>
+                
             <template v-slot:top>
                 <v-toolbar flat>
                     <v-dialog v-model="dialog" max-width="500px">
@@ -41,7 +31,7 @@
                                 <v-container>
                                     <v-row class="elevation-1 font-weight-regular">
                                         <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.name" label="Curso"></v-text-field>
+                                            <v-text-field v-model="editedItem.nombre" label="Curso"></v-text-field>
                                         </v-col>
                                         <v-col cols="12" sm="6" md="4">
                                             <v-text-field v-model="editedItem.cupos" label="Cupos"></v-text-field>
@@ -60,11 +50,11 @@
                             </v-card-text>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="close">
-                                    Cancelar
+                                <v-btn color="deep-orange darken-3" @click="save" dark>
+                                    Editar
                                 </v-btn>
-                                <v-btn color="blue darken-1" text @click="save">
-                                    Guardar
+                                <v-btn color="green" @click="close" dark>
+                                    Cerrar
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
@@ -116,6 +106,7 @@
     // -- Lifecycle Methods
     // -- End Lifecycle Methods
 } */
+import { mapState } from 'vuex'
 export default {
     name: 'table-admin-view',
     data: () => ({
@@ -126,7 +117,7 @@ export default {
                 text: 'Curso',
                 align: 'start',
                 sortable: false,
-                value: 'name',
+                value: 'nombre',
             },
             { text: 'Cupos', value: 'cupos' },
             { text: 'Inscritos', value: 'inscritos' },
@@ -136,10 +127,9 @@ export default {
             { text: 'Fecha', value: 'fecha_registro' },
             { text: 'Acciones', value: 'actions', sortable: false },
         ],
-        cursos: [],
         editedIndex: -1,
         editedItem: {
-            name: '',
+            nombre: '',
             cupos: 0,
             inscritos: 0,
             duracion: '',
@@ -162,6 +152,7 @@ export default {
         formTitle() {
             return this.editedIndex === -1 ? '' : 'Editar Curso'
         },
+        ...mapState(['cursos'])
     },
 
     watch: {
@@ -174,72 +165,16 @@ export default {
     },
 
     created() {
-        this.initialize()
+        
     },
 
     methods: {
-        initialize() {
-            this.cursos = [
-                {
-                    name: 'JavaScript Avanzado',
-                    cupos: 20,
-                    inscritos: 10,
-                    duracion: '2 meses',
-                    costo: 30000,
-                    completado: 'Si',
-                    fecha_registro: '06/03/2022'
-                },
-                {
-                    name: 'CSS para principiantes',
-                    cupos: 35,
-                    inscritos: 23,
-                    duracion: '1 mes',
-                    costo: 10000,
-                    completado: 'Si',
-                    fecha_registro: '05/03/2022'
-                },
-                {
-                    name: 'JavaScript Básico de 0 a 100',
-                    cupos: 25,
-                    inscritos: 0,
-                    duracion: '2 meses',
-                    costo: 20000,
-                    completado: 'Si',
-                    fecha_registro: '05/03/2022'
-                },
-                {
-                    name: 'HTML Básico',
-                    cupos: 35,
-                    inscritos: 0,
-                    duracion: '1 mes',
-                    costo: 10000,
-                    completado: 'Si',
-                    fecha_registro: '31/01/2022'
-                },
-                {
-                    name: 'Vue JS de 0 a 100',
-                    cupos: 35,
-                    inscritos: 35,
-                    duracion: '5 meses',
-                    costo: 85500,
-                    completado: 'Si',
-                    fecha_registro: '06/03/2022'
-                },
-                {
-                    name: 'Estilos con SASS',
-                    cupos: 40,
-                    inscritos: 35,
-                    duracion: '1 mes',
-                    costo: 45000,
-                    completado: 'Si',
-                    fecha_registro: '06/03/2022'
-                },
-            ]
-        },
+        
         getColor(costo) {
             if (costo > 400) return 'green accent-4'
             else if (costo > 200) return 'orange'
             else return 'green'
+            
         },
         getColor2(fecha_registro) {
             if (fecha_registro > 400) return 'green accent-3'

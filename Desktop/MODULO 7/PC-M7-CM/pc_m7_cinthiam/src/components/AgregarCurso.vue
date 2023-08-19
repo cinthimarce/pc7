@@ -6,7 +6,7 @@
             lazy-validation
         >
             <v-text-field
-            v-model="name"
+            v-model="nombre"
             :counter="10"
             :rules="nameRules"
             label="Nombre"
@@ -14,50 +14,43 @@
             ></v-text-field>
 
             <v-text-field
-            v-model="email"
-            :rules="emailRules"
+            v-model="img"
             label="URL de la imagen"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="cupos"
-            :rules="cuposCurso"
             label="Cupos del curso"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="inscritos"
-            :rules="inscritosCurso"
             label="Inscritos en el curso"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="duracion"
-            :rules="duracionCurso"
             label="Inscritos en el curso"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="registro"
-            :rules="fechaRegistro"
             label="Fecha de registro"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="costo"
-            :rules="costoCurso"
             label="Costo del curso"
             required
             ></v-text-field>
 
             <v-text-field
             v-model="descripcion"
-            :rules="descripcionCurso"
             label="Descripcion del curso"
             required
             ></v-text-field>
@@ -66,7 +59,7 @@
             :disabled="!valid"
             color="success"
             class="mr-4"
-            @click="validate"
+            @click="agrCurso()"
             >
             Agregar
             </v-btn>
@@ -81,7 +74,7 @@
 
             <v-btn
             color="error"
-            @click="resetValidation"
+            @click="hideForm"
             >
             Cancelar
             </v-btn>
@@ -111,19 +104,7 @@
         v => !!v || 'Name is required',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters',
       ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: false,
+      
     }),
 
     methods: {
@@ -133,8 +114,9 @@
       reset () {
         this.$refs.form.reset()
       },
-      resetValidation () {
-        this.$refs.form.resetValidation()
+      hideForm () {
+        const showForm = false
+        this.$emit("hideForm",showForm)
       },
       agrCurso(){
             let nuevoCurso ={

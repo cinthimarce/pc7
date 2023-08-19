@@ -14,7 +14,7 @@
                 </v-dialog>     
             </v-toolbar>        
         </template>
-        <agregar-curso v-if="curso in cursos" @agregarCurso="nuevoCurso"/>
+        <agregar-curso v-if="showform == true" @agregarCurso="nuevoCurso" @hideForm="esconderForm"/>
 
     <table-admin/>
     <v-row v-for="alert in alerts" :key="alert.color">
@@ -41,7 +41,9 @@ export default {
         showEdit:false,
         idEdit: null,
         CursoTitle:null,
-        idToDelete:null
+        idToDelete:null,
+        showform:false,
+
     }
   },
   
@@ -93,6 +95,10 @@ export default {
         agregarCurso(){
             this.dialog=true
             this.CursoTitle='Agregar Curso'
+            this.showform=true
+        },
+        esconderForm(data){
+            this.showform=data
         },
         ...mapActions(['agrCurso']),
 
