@@ -3,7 +3,7 @@
         <v-alert outlined :color="alert.color">
             <v-row justify="left" >
                 <v-icon class="ml-3 mr-2">{{ alert.icon }}</v-icon>
-                <p class="mb-0 ">{{ alert.title }}</p>
+                <p class="mb-0 ">{{ alert.title}}<strong class="font-weight-bold">{{ alert.number }}</strong></p>
             </v-row>
         </v-alert>
     </v-container>
